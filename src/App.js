@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
 import Items from './components/items/Items'
+import Toolbar from './components/toolbar/Toolbar'
 
 import './App.css';
 
@@ -14,7 +15,7 @@ const App = () => {
     {
       id: 2,
       title: 'Functional component',
-      viewed: true,
+      viewed: false,
       rating: 2
     },
     {
@@ -25,9 +26,13 @@ const App = () => {
     }
   ]
 
+  // Set initial state of App component (grand father)
+  const [items, setItems] = useState(dataArray)
+
   // Callback from Items : datas updated
-  const updateData = (items) => {
-    console.log(`Updated list : ${JSON.stringify(items)}`)
+  const updateData = (receivedItems) => {
+    console.log(`Updated list : ${JSON.stringify(receivedItems)}`)
+    setItems([...receivedItems])
   }
 
   return (
@@ -36,9 +41,10 @@ const App = () => {
         <h1>
           Mark as done
         </h1>
+        <Toolbar items={items} />
       </header>
 
-      <Items items={dataArray} onUpdate={updateData} />
+      <Items items={items} onUpdate={updateData} />
 
     </div>
   );

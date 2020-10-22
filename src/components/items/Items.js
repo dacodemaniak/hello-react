@@ -1,14 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Item from './Item'
+
 const Items = (props) => {
     const { items, onUpdate } = props
-    
+    const [parentItems, setParentItems] = useState([])
+
     // Sets a callback function
     const submitCallback = (item) => {
-        console.log(`Received ${JSON.stringify(item)}`)
+        
         // Replace the brand updated item in the items array
         const index = items.find((obj) => obj.id === item.id)
         items[index] = item // The one i got back
+
         onUpdate(items)
     }
 
