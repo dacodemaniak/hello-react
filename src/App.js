@@ -25,6 +25,11 @@ const App = () => {
     }
   ]
 
+  // Callback from Items : datas updated
+  const updateData = (items) => {
+    console.log(`Updated list : ${JSON.stringify(items)}`)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -33,7 +38,7 @@ const App = () => {
         </h1>
       </header>
 
-      <Items items={dataArray} />
+      <Items items={dataArray} onUpdate={updateData} />
 
     </div>
   );
