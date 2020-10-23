@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import PropTypes from 'prop-types'
 import Item from './Item'
 
 const Items = (props) => {
@@ -11,6 +12,8 @@ const Items = (props) => {
         // Replace the brand updated item in the items array
         const index = items.find((obj) => obj.id === item.id)
         items[index] = item // The one i got back
+        
+        setParentItems(items)
 
         onUpdate(items)
     }
@@ -38,5 +41,15 @@ const Items = (props) => {
         </div>
     )
 }
+
+Items.propTypes = {
+    items: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      viewed: PropTypes.bool.isRequired,
+      rating: PropTypes.number.isRequired
+    }).isRequired).isRequired,
+    onTodoClick: PropTypes.func.isRequired
+  }
 
 export default Items

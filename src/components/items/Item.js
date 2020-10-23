@@ -12,32 +12,32 @@ const Item = (props) => {
         item.viewed = true
         setUpdatedItem(item)
         console.log('Update current state of item')
-        onUpdate(updatedItem)
+        onUpdate(item)
     }
 
     const handleNote = (note) => {
         console.log(`Note was updated with : ${note}`)
-        item.viewed = true
         item.rating = note
-        setUpdatedItem(item)
+        setUpdatedItem(item) // Need to update
+        onUpdate(item)
         setUserRating(note)
     }
 
-    const ratingComponent = () => {return(<ReactStars
+    const ratingComponent = <ReactStars
         value={item.rating}
         count={5}
         activeColor="#ffd770"
         onChange={(note) => handleNote(note)}
         edit={!item.viewed}
-    />)}
+    />
 
     return (
         <div className="item">
             <h2>
-                { item.title }
+                { item.title } [{item.rating}]
             </h2>
             <form onSubmit={handleSubmit}>
-                { ratingComponent() }
+                { ratingComponent }
                 <button type="submit" disabled={item.viewed}>
                     { item.viewed ? 'Viewed' : 'Check'}
                 </button>
